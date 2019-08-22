@@ -1,4 +1,4 @@
-# Predicting_Pulsar_star_using_Random_Forest_Regression
+# Predicting_Pulsar_star_using_Random_Forest_Classification
 Predicting pulsar stars from telescope data gathered from kaggle using Random Forest Classification. I have also used grid search method to find the appropriate hyperparameters and also used ten fold cross validation to check the variance.Although, there was no improvement in accuracy 
 
 ______About Dataset_________
