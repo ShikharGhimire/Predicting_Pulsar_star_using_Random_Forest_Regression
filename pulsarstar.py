@@ -52,46 +52,4 @@ grid_search = GridSearchCV(estimator=regressor,
                            n_jobs = -1)
 grid_search = grid_search.fit(X_train,y_train)
 best_accuracy = grid_search.best_score_
-best_parameters = grid_search.best_params_
-                          
-
-#Creating an artificial neural networks to see how Neural network works
-import keras
-from keras.wrappers.scikit_learn import KerasClassifier
-from sklearn.model_selection import GridSearchCV
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import Dropout
-
-#Implementing Artificial Neural network
-classifier = Sequential()
-    classifier.add(Dense(output_dim = 5, init = 'uniform',activation = 'relu',input_dim = 8))#First hidden layer
-    classifier.add(Dense(output_dim = 5, init = 'uniform',activation = 'relu' )) #Second hidden layer
-    classifier.add(Dense(output_dim = 1, init = 'uniform',activation = 'sigmoid')) #Output layer. Sigmoid function for the last layer since the dependent variable is binary
-    #Compiling the ANN
-    classifier.compile(optimizer = 'adam',loss = 'binary_crossentropy',metrics = ['accuracy'])
-
-#Using grid_search to find the best hyperparameters
-def build_classifier(optimizer):
-    classifier = Sequential()
-    classifier.add(Dense(output_dim = 5, init = 'uniform',activation = 'relu',input_dim = 8))#First hidden layer
-    classifier.add(Dense(output_dim = 5, init = 'uniform',activation = 'relu' )) #Second hidden layer
-    classifier.add(Dense(output_dim = 1, init = 'uniform',activation = 'sigmoid')) #Output layer. Sigmoid function for the last layer since the dependent variable is binary
-    #Compiling the ANN
-    classifier.compile(optimizer = optimizer,loss = 'binary_crossentropy',metrics = ['accuracy'])
-    return classifier
-
-classifier = KerasClassifier(build_fn = build_classifier)
-#Using grid search to find the best hyperparameters
-parameters = {'batch_size':[5,10,15,20,30,40,50,60,70],
-              'epochs':[20,30,40,50,60,70,80,90,100,200,300,400,500],
-              'optimizer':['adam','rmsprop']}
-
-grid_search = GridSearchCV(estimator = classifier,
-                           param_grid = parameters,
-                           scoring = 'accuracy',
-                           cv = 10)
-
-grid_search = grid_search.fit(X_train,y_train)
-best_parameters = grid_search.best_params_
-best_accuracy = grid_search.best_score_
+best_parameters = grid_search.best_params_                    
